@@ -210,6 +210,15 @@ describe('semanticInfo', () => {
       parseCodeAndGenerateServices(readFileSync(fileName, 'utf8'), badConfig),
     ).toThrowErrorMatchingSnapshot();
   });
+
+  it('config with a missing extends file', () => {
+    const fileName = resolve(FIXTURES_DIR, 'isolated-file.src.ts');
+    const badConfig = createOptions(fileName);
+    badConfig.project = './badTSConfig/tsconfig-extends.json';
+    expect(() =>
+      parseCodeAndGenerateServices(readFileSync(fileName, 'utf8'), badConfig),
+    ).toThrowErrorMatchingSnapshot();
+  });
 });
 
 function testIsolatedFile(parseResult: any) {

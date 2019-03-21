@@ -210,6 +210,10 @@ export function createProgram(code: string, filePath: string, extra: Extra) {
     return undefined;
   }
 
+  if (commandLine.errors.length) {
+    diagnosticReporter(commandLine.errors[0]);
+  }
+
   const compilerHost = ts.createCompilerHost(commandLine.options, true);
   const oldReadFile = compilerHost.readFile;
   compilerHost.readFile = (fileName: string) =>
